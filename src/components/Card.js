@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import ReactSVG from 'react-svg';
+import star from './../images/star.svg';
 
 class Card extends React.Component{
   constructor(props){
@@ -36,7 +37,7 @@ class Card extends React.Component{
           <p className="card-text">{this.props.description}</p>
           <p className="card-text">Цена: {this.props.price}р.</p>
           <i onClick={clickHandler} className={"card-favorite" + ativeClass}>
-            <ReactSVG path="src/images/star.svg"/>
+            <ReactSVG path={star}/>
           </i>
         </div>
       </div>

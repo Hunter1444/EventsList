@@ -1,25 +1,28 @@
 const path = require('path');
+const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   devServer: {
-    contentBase: path.join(__dirname, "./"),
+    contentBase: path.join(__dirname, "bundle"),
     overlay: true,
     port: 8080,
-    publicPath: "/bundle/",
+    publicPath: "/",
     historyApiFallback: true
   },
   plugins: [
-    new ProgressBarPlugin()
+    new ProgressBarPlugin(),
   ],
   devtool: 'eval-source-map',
   entry: './src/index.js',
   stats: "errors-only",
   cache: true,
   output: {
-    path: path.resolve(__dirname, 'bundle'),
-    publicPath : '/bundle/',
+    path: '/',
+    publicPath : '/',
     filename: 'bundle.js',
   },
   module: {
@@ -30,18 +33,18 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-react']
           }
         }
       },
       {
         test: /\.scss$/,
         use: [{
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: "style-loader"
         }, {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader"
         }, {
-            loader: "sass-loader" // compiles Sass to CSS
+            loader: "sass-loader"
         }]
       },
       {
@@ -54,14 +57,4 @@ const config = {
   },
 }
 
-module.exports = env => {
-  if(env.NODE_ENV === 'prod'){
-    config.plugins.push(
-      new UglifyJsPlugin({
-        test: /\.js($|\?)/i,
-        cache: true
-      })
-    )
-  }
-  return config;
-}
+module.exports = env => config;
