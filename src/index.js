@@ -22,11 +22,10 @@ const json = [
     type: "exhibition",
   },
   {
-    title: "Титл Модильяни",
-    description: "дескрипшн выставки здесь",
+    title: "Выставка",
+    description: "Описание",
     price: 2500,
-    type: "exhibition",
-    favorite: true
+    type: "exhibition"
   },
 ]
 
