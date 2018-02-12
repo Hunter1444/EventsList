@@ -1,3 +1,4 @@
+import "babel-polyfill";
 import style from './scss/index.scss';
 import Main from './containers/Main';
 import Favorite from './containers/Favorite';
